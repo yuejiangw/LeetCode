@@ -9,4 +9,3 @@ class Solution:
             for j in range(col):
                 result[j].append(A[i][j])
         return result
-
