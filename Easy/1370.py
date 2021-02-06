@@ -11,12 +11,12 @@ class Solution:
             while(tmp):
                 minChar = min(tmp)
                 result.append(minChar)
-                self.removeAll(tmp, minChar)
+                tmp = self.removeAll(tmp, minChar)
             tmp = list(s)
             while(tmp):
                 maxChar = max(tmp)
                 result.append(maxChar)
-                self.removeAll(tmp, maxChar)
+                tmp = self.removeAll(tmp, maxChar)
         return ''.join(result)
 
 if __name__ == "__main__":
