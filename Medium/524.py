@@ -6,6 +6,8 @@ class Solution:
             i = 0
             j = 0
             while i < len(tmp):
+                # j < len(word)必须写在前面
+                # 借助比较表达式的短路原则限制j不能越界
                 if j < len(word) and tmp[i] == word[j]:
                     i += 1
                     j += 1
