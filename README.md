@@ -11,7 +11,7 @@ My record of the solutions for LeetCode problems. The solutions are mainly based
 |     Categories      | Is Done? |
 | :-----------------: | :------: |
 |    Two pointers     |   yes    |
-|        Sort         |          |
+|        Sort         |   yes    |
 |       Greedy        |          |
 |    Binary Search    |          |
 | Divide and Conquer  |          |
