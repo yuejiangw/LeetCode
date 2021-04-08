@@ -28,7 +28,7 @@ My record of the solutions for LeetCode problems. The solutions are mainly based
 |   Linked List    |   yes    |
 |       Tree       |          |
 | Stack and Queue  |          |
-|     Hash Map     |          |
+|     Hash Map     |   yes    |
 |      String      |   yes    |
 | Array and Matrix |   yes    |
 |      Graph       |          |
