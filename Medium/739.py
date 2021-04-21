@@ -14,7 +14,4 @@ class Solution:
                     result[stack_head[0]] = index - stack_head[0]
                 stack.append((index, tmp))   
         # 如果最后栈非空，则栈内元素都对应0
-        while stack:
-            curr = stack.pop(-1)
-            result[curr[0]] = 0
         return result
