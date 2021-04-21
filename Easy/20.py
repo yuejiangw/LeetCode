@@ -1,19 +1,19 @@
 class Solution:
-    def isValid(self, s: str) -> bool: 
+    def isValid(self, s: str) -> bool:
         if not s:
             return False
-        leftPart = ['(', '[', '{']
-        rightPart = [')', ']', '}']
+        left_part = ['(', '{', '[']
+        right_part = [')', '}', ']']
         stack = []
-        for char in s:
-            if char in leftPart:
-                stack.append(char)
-            if char in rightPart:
+        for c in list(s):
+            if c in left_part:
+                stack.append(c)
+            elif c in right_part:
                 if stack == []:
-                    stack.append(char)
-                elif stack[-1] in leftPart and \
-                    rightPart.index(char) == leftPart.index(stack[-1]):
-                    stack.pop()
+                    stack.append(c)
+                elif stack[-1] in left_part and \
+                    right_part.index(c) == left_part.index(stack[-1]):
+                    stack.pop(-1)
                 else:
-                    stack.append(char)
-        return stack == []
+                    stack.append(c)
+        return (stack == [])
