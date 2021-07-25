@@ -3,15 +3,16 @@ class Solution:
         """
         Do not return anything, modify nums1 in-place instead.
         """
-        n1 = nums1[0:m]
-        n2 = nums2[0:n]
-        nums1.clear()
-        while n1 and n2:
-            if n1[0] <= n2[0]:
-                nums1.append(n1.pop(0))
+        arr1 = nums1[: m]
+        arr2 = nums2[: n]
+        i = 0
+        while arr1 and arr2:
+            if arr1[0] < arr2[0]:
+                nums1[i] = arr1.pop(0)
             else:
-                nums1.append(n2.pop(0))
-        if n1:
-            nums1 += n1
-        if n2:
-            nums1 += n2
+                nums1[i] = arr2.pop(0)
+            i += 1
+        if arr1:
+            nums1[i:] = arr1
+        if arr2:
+            nums1[i:] = arr2
