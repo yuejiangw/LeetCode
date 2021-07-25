@@ -1,24 +1,23 @@
 # Definition for singly-linked list.
 # class ListNode:
-#     def __init__(self, x):
-#         self.val = x
-#         self.next = None
-
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
 class Solution:
-    def getLength(self, head: ListNode) -> ListNode:
+    def get_len(self, head: ListNode) -> int:
         curr = head
-        count = 0
+        result = 0
         while curr:
-            count += 1
             curr = curr.next
-        return count
+            result += 1
+        return result
 
     def middleNode(self, head: ListNode) -> ListNode:
-        length = self.getLength(head)
-        target = length // 2
-        count = 0
+        length = self.get_len(head)
+        target_len = length // 2 + 1
         curr = head
-        while count < target:
+        counter = 1
+        while counter < target_len:
             curr = curr.next
-            count += 1
+            counter += 1
         return curr
