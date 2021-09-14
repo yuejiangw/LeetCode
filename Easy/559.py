@@ -8,16 +8,11 @@ class Node:
 
 class Solution:
     def maxDepth(self, root: 'Node') -> int:
-        if not root:
-            return 0
-        depth = 0
-        queue = deque()
-        queue.append(root)
-        while queue:
-            size = len(queue)
-            for i in range(size):
-                node = queue.popleft()
-                if node.children:
-                    queue += deque(node.children)
-            depth += 1
-        return depth
+        def get_depth(root):
+            if not root:
+                return 0
+            depth = 0
+            for i in range(len(root.children)):
+                depth = max(depth, get_depth(root.children[i]))
+            return depth + 1
+        return get_depth(root)
