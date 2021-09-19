@@ -17,3 +17,21 @@ class Solution:
                 else:
                     stack.append(c)
         return (stack == [])
+
+from collections import deque
+class Solution:
+    """减小了解空间"""
+    def isValid(self, s: str) -> bool:
+        left = ['(', '[', '{']
+        right = [')', ']', '}']
+        stack = deque()
+        for char in s:
+            if char in left:
+                stack.append(char)
+            else:
+                if len(stack) > 0 and stack[-1] in left and \
+                right.index(char) == left.index(stack[-1]):
+                    stack.pop()
+                else:
+                    return False
+        return len(stack) == 0
