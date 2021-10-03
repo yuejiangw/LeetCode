@@ -19,7 +19,7 @@ class Solution:
                     or dfs(board, word, visited, i, j - 1, k + 1) \
                     or dfs(board, word, visited, i + 1, j, k + 1) \
                     or dfs(board, word, visited, i, j + 1, k + 1)
-            visited[i][j] = False
+            visited[i][j] = False   # 回溯，恢复标志位
             return res
 
         for i in range(max_row):
