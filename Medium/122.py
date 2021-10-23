@@ -1,0 +1,18 @@
+from typing import List
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+        if len(prices) <= 1:
+            return 0
+        
+        # dp[i][0] 代表第i天持有股票的最大钱数
+        # dp[i][1] 代表第i天不持有股票的最大钱数
+        dp = [[0, 0] for _ in range(len(prices))]
+        dp[0][0] = -prices[0]
+        dp[0][1] = 0
+
+        for i in range(1, len(prices)):
+            # 第i天持有股票有两种情况：第i-1天也持有股票，或者第i-1天不持有股票，第i天买入
+            # 本题中可以多次买卖，所以第二种情况用dp[i - 1][1] + prices[i]
+            dp[i][0] = max(dp[i - 1][0], dp[i - 1][1] - prices[i])
+            dp[i][1] = max(dp[i - 1][1], dp[i - 1][0] + prices[i])
+        return max(dp[-1])
