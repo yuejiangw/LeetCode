@@ -23,3 +23,26 @@ class Solution:
             return [val2, val1]
         
         return max(rob_tree(root))
+
+    def rob(self, root: TreeNode) -> int:
+        """记忆化递归"""
+        dp = dict()
+        def rob_tree(node):
+            if not node:
+                return 0
+            # 记忆化递归
+            if node in dp.keys():
+                return dp[node]
+            # 偷
+            res1 = 0
+            if node.left is not None:
+                res1 += (rob_tree(node.left.left) + rob_tree(node.left.right))
+            if node.right is not None:
+                res1 += (rob_tree(node.right.left) + rob_tree(node.right.right))
+            res1 += node.val
+            # 不偷
+            res2 = rob_tree(node.left) + rob_tree(node.right)
+
+            dp[node] = max(res1, res2)
+            return dp[node]
+        return rob_tree(root)
