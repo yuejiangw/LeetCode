@@ -1,3 +1,5 @@
+from typing import List
+
 class Solution:
     def reconstructQueue(self, people: List[List[int]]) -> List[List[int]]:
         if not people:
@@ -8,10 +10,5 @@ class Solution:
         
         result = []
         for p in people:
-            # 如果前面不能有更高的人，则直接插入到头部
-            if p[1] == 0:
-                result.insert(0, p)
-            # 如果前面有k个比他高的人，则插入到第k位
-            else:
-                result.insert(p[1], p)
+            result.insert(p[1], p)
         return result
