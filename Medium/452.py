@@ -1,3 +1,5 @@
+from typing import List
+
 class Solution:
     def findMinArrowShots(self, points: List[List[int]]) -> int:
         if len(points) == 0:
@@ -23,3 +25,22 @@ class Solution:
                     j = i + 1
                     arrow += 1
             return arrow
+
+
+class Solution:
+    def findMinArrowShots(self, points: List[List[int]]) -> int:
+        points = sorted(points, key=lambda x: x[0])
+        res = 0
+        i = 0
+        while i < len(points):
+            min_end = points[i][1]
+            j = i + 1
+            while j < len(points):
+                if points[j][0] <= min_end:
+                    min_end = min(min_end, points[j][1])
+                    j += 1
+                else:
+                    break
+            res += 1
+            i = j
+        return res
