@@ -1,3 +1,5 @@
+from typing import List
+
 class Solution:
     """暴力解，时间复杂度O(n^2)"""
     def twoSum(self, nums: List[int], target: int) -> List[int]:
