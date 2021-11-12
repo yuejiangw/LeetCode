@@ -1,3 +1,4 @@
+from typing import List
 class Solution:
     def lowerBound(self, nums: List[int], target: int) -> int:
         low = 0
