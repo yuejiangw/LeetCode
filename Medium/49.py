@@ -16,3 +16,17 @@ class Solution:
                 group = [strs[sorted_strs[i][0]]]
         res.append(group)
         return res
+
+
+class Solution:
+    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
+        if len(strs) == 1:
+            return [strs]
+        dic = {}
+        for s in strs:
+            k = ''.join(sorted(s))
+            if k not in dic.keys():
+                dic[k] = [s]
+            else:
+                dic[k].append(s)
+        return list(dic.values())
