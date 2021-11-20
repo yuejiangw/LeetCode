@@ -1,3 +1,6 @@
+from typing import List
+from collections import Counter
+
 class Solution:
     def findLHS(self, nums: List[int]) -> int:
         counts = {}
@@ -15,3 +18,13 @@ class Solution:
             res = 0 if k+1 not in counts.keys() else v+counts[k+1]
             results.append(res)
         return max(results)
+
+
+class Solution:
+    def findLHS(self, nums: List[int]) -> int:
+        res = 0
+        nums = Counter(nums)
+        for k, v in nums.items():
+            if k + 1 in nums:
+                res = max(res, v + nums[k + 1])
+        return res
