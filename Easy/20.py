@@ -35,3 +35,23 @@ class Solution:
                 else:
                     return False
         return len(stack) == 0
+
+
+class Solution:
+    def isValid(self, s: str) -> bool:
+        stack = deque()
+        left = ["(", "{", "["]
+        right = [")", "}", "]"]
+
+        for char in s:
+            if len(stack) == 0:
+                stack.append(char)
+            else:
+                if char in left:
+                    stack.append(char)
+                else:
+                    if stack[-1] in left and left.index(stack[-1]) == right.index(char):
+                        stack.pop()
+                    else:
+                        stack.append(char)
+        return len(stack) == 0

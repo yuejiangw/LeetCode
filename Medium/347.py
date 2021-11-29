@@ -1,3 +1,7 @@
+import heapq
+from collections import Counter
+from typing import List
+
 class Solution:
     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
         hash_map = {}
@@ -12,3 +16,20 @@ class Solution:
         for i in range(k):
             results.append(buckets[i][0])
         return results
+
+
+class Solution:
+    """利用heapq构造小顶堆"""
+    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+        counter = Counter(nums)
+
+        pri_queue = []
+        for key, count in counter.items():
+            heapq.heappush(pri_queue, (count, key))
+            if len(pri_queue) > k:
+                heapq.heappop(pri_queue)
+
+        res = [0] * k
+        for i in range(k - 1, -1, -1):
+            res[i] = heapq.heappop(pri_queue)[1]
+        return res
