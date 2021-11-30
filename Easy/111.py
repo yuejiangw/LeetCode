@@ -1,9 +1,10 @@
 # Definition for a binary tree node.
-# class TreeNode:
-#     def __init__(self, val=0, left=None, right=None):
-#         self.val = val
-#         self.left = left
-#         self.right = right
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
 from collections import deque
 class Solution:
     def minDepth(self, root: TreeNode) -> int:
@@ -37,3 +38,18 @@ class Solution:
         if not root:
             return 0
         return getDepth(root)
+
+from typing import Optional
+class Solution:
+    """另外一种递归写法，不需要构建辅助函数"""
+    def minDepth(self, root: Optional[TreeNode]) -> int:
+        if not root:
+            return 0
+        elif not root.left and not root.right:
+            return 1
+        elif not root.left:
+            return self.minDepth(root.right) + 1
+        elif not root.right:
+            return self.minDepth(root.left) + 1
+        else:
+            return min(self.minDepth(root.right), self.minDepth(root.left)) + 1
