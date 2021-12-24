@@ -4,8 +4,15 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
+
+from typing import List
+
 class Solution:
     def bstFromPreorder(self, preorder: List[int]) -> Optional[TreeNode]:
+        """
+        对于 BST, 其中序遍历为一个有序序列，因此此题可以转换为通过 preOrder 序列和
+        inOrder 序列重建一颗二叉树
+        """
         if not preorder:
             return None
         if len(preorder) == 1:
