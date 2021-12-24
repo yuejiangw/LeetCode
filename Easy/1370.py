@@ -1,25 +1,20 @@
+from collections import Counter
+
+
 class Solution:
-    def removeAll(self, s, a: str):
-        while a in s:
-            s.remove(a)
-        return s
-
     def sortString(self, s: str) -> str:
-        result = []
-        while len(result) != len(s):
-            tmp = list(s)
-            while(tmp):
-                minChar = min(tmp)
-                result.append(minChar)
-                tmp = self.removeAll(tmp, minChar)
-            tmp = list(s)
-            while(tmp):
-                maxChar = max(tmp)
-                result.append(maxChar)
-                tmp = self.removeAll(tmp, maxChar)
-        return ''.join(result)
-
-if __name__ == "__main__":
-    sol = Solution()
-    test = 'rat'
-    print(sol.sortString(test))
+        """
+        题目本质: 不断按字典序升序添加 → 降序添加，直到所有字符都出现在结果中
+        """
+        count = Counter(sorted(s))
+        res = ''
+        while len(res) < len(s):
+            for k, v in count.items():
+                if v > 0:
+                    res += k
+                    count[k] -= 1
+            for k, v in reversed(count.items()):
+                if v > 0:
+                    res += k
+                    count[k] -= 1
+        return res
