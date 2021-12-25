@@ -9,8 +9,6 @@ import re
 
 class Solution:
     def recoverFromPreorder(self, traversal: str) -> Optional[TreeNode]:
-        if not traversal:
-            return None
         traversal = re.findall(r'\w+|-+', traversal)
 
         def dfs(traversal):
