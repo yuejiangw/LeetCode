@@ -1,15 +1,20 @@
 class CQueue:
 
     def __init__(self):
-        self.queue = []
+        self.in_stack = []
+        self.out_stack = []
 
     def appendTail(self, value: int) -> None:
-        self.queue.append(value)
+        self.in_stack.append(value)
 
     def deleteHead(self) -> int:
-        if self.queue == []:
+        if not self.in_stack and not self.out_stack:
             return -1
-        return self.queue.pop(0)
+        if self.out_stack:
+            return self.out_stack.pop()
+        while self.in_stack:
+            self.out_stack.append(self.in_stack.pop())
+        return self.out_stack.pop()
 
 
 # Your CQueue object will be instantiated and called as such:

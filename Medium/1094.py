@@ -4,7 +4,7 @@ from typing import List
 class Solution:
     def carPooling(self, trips: List[List[int]], capacity: int) -> bool:
         """
-        差分数组，需要注意的一点是在end时刻，乘客已经下车了，所以数组中是
+        差分数组，需要注意的一点是在 end 时刻，乘客已经下车了，所以数组中是
         diff_arr[end] -= num 而不是 diff_arr[end+1] -= num
         """
         length = max(trips, key=lambda x: x[2])[2] + 1
