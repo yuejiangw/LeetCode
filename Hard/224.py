@@ -40,7 +40,7 @@ class Solution:
             else:
                 while op_stack and op_stack[-1] != '(':
                     pre_op = op_stack[-1]
-                    if op_prio[pre_op] > op_prio[c]:
+                    if op_prio[pre_op] < op_prio[c]:
                         break
                     self.compute(num_stack, op_stack)
                 op_stack.append(c)
