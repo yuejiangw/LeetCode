@@ -1,4 +1,5 @@
-from typing import List
+from typing import List, Optional
+from collections import deque
 
 # Definition for a binary tree node.
 class TreeNode:
@@ -6,6 +7,7 @@ class TreeNode:
         self.val = val
         self.left = left
         self.right = right
+
 
 class Solution:
     def inorderTraversal(self, root):
@@ -33,4 +35,22 @@ class Solution:
             recursion(root.right)
         res = []
         recursion(root)
+        return res
+
+    def inorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+        """ 改良，左链入栈版迭代 """
+        if not root:
+            return []
+
+        stack = deque()
+        res = []
+
+        while root or stack:
+            while root:
+                stack.append(root)
+                root = root.left
+            root = stack.pop()
+            res.append(root.val)
+            root = root.right
+
         return res
