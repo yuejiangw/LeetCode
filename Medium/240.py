@@ -1,3 +1,6 @@
+from typing import List
+
+
 class Solution:
     def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
         if matrix == None or len(matrix) == 0 or len(matrix[0]) == 0:
