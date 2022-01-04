@@ -18,6 +18,6 @@ class Solution:
                     path.append(letter_map[idx][j])  
                     backtracking(digits, i + 1)
                     path.pop()
-            return result
+
         backtracking(digits, 0)
         return result
