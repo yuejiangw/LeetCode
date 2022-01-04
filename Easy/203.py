@@ -18,3 +18,20 @@ class Solution:
             if curr is not None:
                 curr = curr.next
         return new_head.next 
+
+
+class Solution:
+    def removeElements(self, head: ListNode, val: int) -> ListNode:
+        if not head:
+            return head
+
+        dummy_head = ListNode(0, head)
+        pre = dummy_head
+        curr = head
+        while curr:
+            if curr.val == val:
+                pre.next = curr.next
+            else:
+                pre = curr
+            curr = curr.next
+        return dummy_head.next
