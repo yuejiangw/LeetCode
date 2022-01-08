@@ -39,19 +39,14 @@ class Solution:
 
 class Solution:
     def isValid(self, s: str) -> bool:
-        stack = deque()
-        left = ["(", "{", "["]
-        right = [")", "}", "]"]
-
-        for char in s:
-            if len(stack) == 0:
-                stack.append(char)
+        left_part = {')': '(', '}': '{', ']': '['}
+        stack = []
+        for c in s:
+            if c == '(' or c == '[' or c == '{':
+                stack.append(c)
             else:
-                if char in left:
-                    stack.append(char)
+                if stack and stack[-1] == left_part[c]:
+                    stack.pop()
                 else:
-                    if stack[-1] in left and left.index(stack[-1]) == right.index(char):
-                        stack.pop()
-                    else:
-                        stack.append(char)
-        return len(stack) == 0
+                    stack.append(c)
+        return stack == []
