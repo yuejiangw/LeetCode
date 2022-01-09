@@ -19,3 +19,29 @@ class Solution:
                 return True
         return False
         
+from collections import defaultdict, Counter
+class Solution:
+    """ sliding window, O(n) """
+    def checkInclusion(self, s1: str, s2: str) -> bool:
+        window = defaultdict(int)
+        need = Counter(s1)
+        i, j = 0, 0
+        valid = 0
+        while j < len(s2):
+            c = s2[j]
+            j += 1
+            if c in need:
+                window[c] += 1
+                if window[c] == need[c]:
+                    valid += 1
+            # shrink window
+            while j - i >= len(s1):
+                if valid == len(need):
+                    return True
+                d = s2[i]
+                i += 1
+                if d in need:
+                    if window[d] == need[d]:
+                        valid -= 1
+                    window[d] -= 1
+        return False
