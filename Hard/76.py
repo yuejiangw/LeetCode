@@ -32,3 +32,37 @@ class Solution:
 
                 i += 1
         return res
+
+
+from collections import defaultdict, Counter
+class Solution:
+    def minWindow(self, s: str, t: str) -> str:
+        window = defaultdict(int)
+        need = Counter(t)
+        length = float('inf')   # the lenght of the minimum covered substring
+        start = 0               # the start index of the minimum covered substring
+        valid = 0               # the number of letter that has satisfied the need
+        i, j = 0, 0
+        while j < len(s):
+            # c is going to be added into the window
+            c = s[j]
+            j += 1
+            # update the data inside the window
+            if c in need:
+                window[c] += 1
+                if window[c] == need[c]:
+                    valid += 1
+            # shrink the left side of the window
+            while valid == len(need):
+                # update the substring
+                if j - i < length:
+                    start = i
+                    length = j - i
+                # d is going to be removed from the window
+                d = s[i]
+                i += 1
+                if d in need:
+                    if window[d] == need[d]:
+                        valid -= 1
+                    window[d] -= 1
+        return '' if length == float('inf') else s[start: start + length]
