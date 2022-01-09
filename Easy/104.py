@@ -15,7 +15,7 @@ class Solution:
 from collections import deque
 from typing import Optional
 class Solution:
-    """ BFS """
+    """ 迭代法，采用层序遍历 """
     def maxDepth(self, root: Optional[TreeNode]) -> int:
         res = 0
         if not root:
