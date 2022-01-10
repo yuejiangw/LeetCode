@@ -7,14 +7,20 @@ class Solution:
         def backtracking(start):
             # when start == len(s), return
             if start == len(num):
+                # a valid sequence should have at least 3 elements
                 if len(path) > 2:
                     res.append(path[:])
                 return
             for i in range(start, len(num)):
+                # the valid number can't have a leading '0'
+                # use str(int(n)) == n to judge
                 n = num[start: i + 1]
-                if len(path) < 2 and str(int(n)) == n:
+                if str(int(n)) != n:
+                    break
+                # the first and the second element in path does not need to follow the rule
+                if len(path) < 2:
                     path.append(int(n))
-                elif len(path) >= 2 and str(int(n)) == n and int(n) == path[-1] + path[-2]:
+                elif len(path) >= 2 and int(n) == path[-1] + path[-2]:
                     path.append(int(n))
                 else:
                     continue
