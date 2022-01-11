@@ -1,0 +1,8 @@
+class Solution:
+    def hammingWeight(self, n: int) -> int:
+        # n & (n - 1) 可以消除最后一个1
+        res = 0
+        while n > 0:
+            n = n & (n - 1)
+            res += 1
+        return res

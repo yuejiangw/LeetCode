@@ -53,3 +53,23 @@ class Solution:
             return self.minDepth(root.left) + 1
         else:
             return min(self.minDepth(root.right), self.minDepth(root.left)) + 1
+
+class Solution:
+    """ bfs """
+    def minDepth(self, root: TreeNode) -> int:
+        if not root:
+            return 0
+        queue = deque([root])
+        depth = 1
+        while queue:
+            length = len(queue)
+            for _ in range(length):
+                node = queue.popleft()
+                if node.left is None and node.right is None:
+                    return depth
+                if node.left:
+                    queue.append(node.left)
+                if node.right:
+                    queue.append(node.right)
+            depth += 1
+        return depth
