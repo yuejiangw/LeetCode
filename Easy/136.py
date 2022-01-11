@@ -1,12 +1,16 @@
 from typing import List
+
+
 class Solution:
+    """
+    ^: xor
+    0 ^ x = x
+    a ^ (a ^ c) = (a ^ a) ^ c
+    a ^ a = 0
+    最后剩下的一个数就是落单的数字
+    """
     def singleNumber(self, nums: List[int]) -> int:
-        nums.sort()
-        i = 0   
-        while i < len(nums):
-            if i == len(nums) - 1:
-                return nums[i]
-            elif nums[i] == nums[i + 1]:
-                i += 2
-            else:
-                return nums[i]
+        res = 0
+        for num in nums:
+            res ^= num
+        return res
