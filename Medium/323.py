@@ -1,8 +1,9 @@
 from typing import List
-from collections import defaultdict
+from collections import defaultdict, deque
 
 
 class Solution:
+    """ DFS """
     def get_adj(self, edges):
         adj = defaultdict(list)
         for edge in edges:
@@ -31,3 +32,35 @@ class Solution:
                 count += 1
 
         return count
+
+
+class Solution:
+    """ BFS """
+    def countComponents(self, n: int, edges: List[List[int]]) -> int:
+
+        def get_graph(edges):
+            graph = defaultdict(list)
+            for edge in edges:
+                graph[edge[0]].append(edge[1])
+                graph[edge[1]].append(edge[0])
+            return graph
+
+        def bfs(graph, node, visited):
+            queue = deque([node])
+            while queue:
+                length = len(queue)
+                for _ in range(length):
+                    n = queue.popleft()
+                    visited.add(n)
+                    for adj in graph[n]:
+                        if adj not in visited:
+                            queue.append(adj)
+
+        graph = get_graph(edges)
+        visited = set()
+        res = 0
+        for node in range(n):
+            if node not in visited:
+                bfs(graph, node, visited)
+                res += 1
+        return res
