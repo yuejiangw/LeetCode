@@ -1,5 +1,5 @@
-from typing import List
 from collections import deque
+from typing import List
 
 
 class Solution:
@@ -17,13 +17,16 @@ class Solution:
             queue.append((x, y))
             visited[x][y] = 1
             while queue:
-                i, j = queue.popleft()
-                for dx, dy in [(1, 0), (-1, 0), (0, 1), (0, -1)]:
-                    new_x, new_y = i + dx, j + dy
-                    if 0 <= new_x < row and 0 <= new_y < col and visited[new_x][new_y] == 0 \
-                            and heights[new_x][new_y] >= heights[i][j]:
-                        queue.append((new_x, new_y))
-                        visited[new_x][new_y] = 1
+                length = len(queue)
+                for _ in range(length):
+                    i, j = queue.popleft()
+                    for dx, dy in [(1, 0), (-1, 0), (0, 1), (0, -1)]:
+                        new_x, new_y = i + dx, j + dy
+                        if 0 <= new_x < row and 0 <= new_y < col \
+                                and visited[new_x][new_y] == 0 \
+                                and heights[new_x][new_y] >= heights[i][j]:
+                            queue.append((new_x, new_y))
+                            visited[new_x][new_y] = 1
 
         for i in range(row):
             bfs(p, i, 0)
