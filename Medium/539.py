@@ -1,3 +1,6 @@
+from typing import List
+
+
 class Solution:
     def findMinDifference(self, timePoints: List[str]) -> int:
         # 从 0 到 24 小时一共只有 1440 分钟，若超过了这个 size 则说明一定有重复时间
