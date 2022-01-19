@@ -1,5 +1,6 @@
 class Solution:
     def containsNearbyDuplicate(self, nums: List[int], k: int) -> bool:
+        """ 集合 """
         if len(set(nums)) == len(nums):
             return False
         
@@ -18,3 +19,15 @@ class Solution:
                     return True
                 i += 1
             return False
+
+    def containsNearbyDuplicate(self, nums: List[int], k: int) -> bool:
+        """ 哈希表 """
+        if not nums or len(nums) < 2:
+            return False
+        map = {}
+        for i, n in enumerate(nums):
+            if n in map:
+                if abs(i - map[n]) <= k:
+                    return True
+            map[n] = i
+        return False
