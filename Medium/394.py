@@ -35,3 +35,31 @@ class Solution:
         while deq:
             result += deq.popleft()
         return result
+
+
+class Solution:
+    def decodeString(self, s: str) -> str:
+        stack = []
+        i = 0
+        while i < len(s):
+            # If current char is '[' or a normal English letter,
+            # then push it into stack directly.
+            if s[i] == '[' or 'a' <= s[i] <= 'z':
+                stack.append(s[i])
+                i += 1
+            # If current char is a number, then parse the following
+            # characters until we reach a non-number character.
+            elif s[i].isdigit():
+                start = i
+                while s[i].isdigit():
+                    i += 1
+                stack.append(int(s[start: i]))
+            # If current char is ']', then pop from the stack until we meet a '['
+            elif s[i] == ']':
+                tmp = ''
+                while stack[-1] != '[':
+                    tmp = stack.pop() + tmp
+                stack.pop()
+                stack.append(stack.pop() * tmp)
+                i += 1
+        return ''.join(stack)
