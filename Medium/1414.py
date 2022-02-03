@@ -8,8 +8,8 @@ class Solution:
             next_fib = fibs[-1] + fibs[-2]
 
         res = 0
-        # Iterate the candidate fib numbers from end to start, and choose the
-        # larger fib number as much as possible.
+        # Iterate the candidate fib numbers from end to start,
+        # and choose the larger fib number as much as possible.
         for i in range(len(fibs) - 1, -1, -1):
             res += k // fibs[i]
             k %= fibs[i]
