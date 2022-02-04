@@ -9,7 +9,7 @@ class Solution:
         path = 0
 
         def dfs(i, j):
-            """ 获取当前金块，并向四周扩散 """
+            """ 获取当前金块, 并向四周扩散 """
             nonlocal path, res
             if i < 0 or i >= m or j < 0 or j >= n or grid[i][j] == 0 or visit[i][j]:
                 res = max(res, path)
