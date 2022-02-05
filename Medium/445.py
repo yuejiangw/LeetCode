@@ -41,3 +41,36 @@ class Solution:
                 new_head.next = new_node
         return new_head.next
                 
+
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
+        def reverse_list(l: ListNode):
+            if not l or not l.next:
+                return l
+            head = reverse_list(l.next)
+            l.next.next = l
+            l.next = None
+            return head
+
+        p1, p2 = reverse_list(l1), reverse_list(l2)
+        carry = 0
+        head = ListNode()
+        curr = head
+        while p1 or p2 or carry:
+            num = carry
+            if p1:
+                num += p1.val
+                p1 = p1.next
+            if p2:
+                num += p2.val
+                p2 = p2.next
+            curr.next = ListNode(num % 10)
+            curr = curr.next
+            carry = num // 10
+
+        return reverse_list(head.next)
