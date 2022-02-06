@@ -33,6 +33,8 @@ class Solution:
                     board[i][j] = 'O'
 
 from collections import deque
+
+
 class Solution:
     def solve(self, board: List[List[str]]) -> None:
         """
@@ -53,16 +55,15 @@ class Solution:
                     if board[x][y] == 'X' or board[x][y] == 'A':
                         continue
                     board[x][y] = 'A'
-                    visited[x][y] = 1
                     for dx, dy in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
                         x_next = x + dx
                         y_next = y + dy
-                        if x_next < 0 or y_next < 0 or x_next >= row or y_next >= col:
-                            continue
-                        if visited[x_next][y_next] == 1:
-                            continue
-                        queue.append((x_next, y_next))
+                        if 0 <= x_next < row and 0 <= y_next < col \
+                                and not visited[x_next][y_next]:
+                            queue.append((x_next, y_next))
+                            visited[x_next][y_next] = 1
 
+        # 将矩形四条边上所有的'O'都变成'A'
         for i in range(row):
             bfs(i, 0)
             bfs(i, col - 1)
@@ -70,6 +71,7 @@ class Solution:
             bfs(0, j)
             bfs(row - 1, j)
 
+        # 由于矩形边上所有的'O'都已经变成了'A'，因此遍历矩阵时剩下的'O'就是被围绕的'O'
         for i in range(row):
             for j in range(col):
                 if board[i][j] == 'O':
