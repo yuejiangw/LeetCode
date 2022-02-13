@@ -1,19 +1,15 @@
+from typing import List
+
+
 class Solution:
     def nextGreaterElement(self, nums1: List[int], nums2: List[int]) -> List[int]:
-        max_num2 = max(nums2)
-        len_num2 = len(nums2)
-        res = []
-        for num in nums1:
-            if num == max_num2:
-                res.append(-1)
-            else:
-                idx = nums2.index(num)
-                flag = False
-                for i in range(idx, len_num2):
-                    if nums2[i] > num:
-                        res.append(nums2[i])
-                        flag = True
-                        break
-                if not flag:
-                    res.append(-1)
-        return res
+        """ 单调栈 + 哈希表, 时间复杂度 O(len(nums1) + len(nums2)) """
+        idx_map = {}
+        stack = []
+        for n in nums2:
+            while stack and n > stack[-1]:
+                idx_map[stack.pop()] = n
+            stack.append(n)
+        while stack:
+            idx_map[stack.pop()] = -1
+        return [idx_map[x] for x in nums1]
