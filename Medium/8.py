@@ -50,3 +50,35 @@ class Solution:
             return pow(2, 31) - 1
         else:
             return result
+
+class Solution:
+    def myAtoi(self, s: str) -> int:
+        idx = 0
+        n = len(s)
+
+        while idx < n and s[idx] == ' ':
+            idx += 1
+        
+        if idx == n:
+            return 0
+
+        # Judge if s is a positive or negative number.
+        is_negative = False
+        if s[idx] == '-':
+            is_negative = True
+            idx += 1
+        elif s[idx] == '+':
+            idx += 1
+        elif not s[idx].isdigit():
+            return 0
+        
+        res = 0
+        while idx < n and s[idx].isdigit():
+            digit = int(s[idx])
+            res = res * 10 + digit
+            idx += 1
+            if not is_negative and res > 2**31 - 1:
+                return 2** 31 - 1
+            elif is_negative and -res < -2**31:
+                return -2**31
+        return -res if is_negative else res
