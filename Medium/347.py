@@ -33,3 +33,23 @@ class Solution:
         for i in range(k - 1, -1, -1):
             res[i] = heapq.heappop(pri_queue)[1]
         return res
+
+
+from collections import Counter
+import heapq
+class Solution:
+    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+        # top k: use min heap. Every time we want to push a element into the heap,
+        # First we should compare it with the top of the heap. If the element is
+        # smaller than the heap top, then discard it. Otherwise, replace the heap
+        # top to the element.
+        freq = Counter(nums)
+        heap = []
+        for key, val in freq.items():
+            heapq.heappush(heap, (val, key))
+            if len(heap) > k:
+                heapq.heappop(heap)
+        res = []
+        for _ in range(k):
+            res.append(heapq.heappop(heap)[1])
+        return res
