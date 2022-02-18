@@ -10,7 +10,7 @@ class Solution:
 
 
 class Solution:
-    """哈希表，时间复杂度O(nlogn)"""
+    """哈希表, 时间复杂度O(n)"""
     def twoSum(self, nums: List[int], target: int) -> List[int]:
         hashmap = {}
         for idx, num in enumerate(nums):
@@ -19,3 +19,4 @@ class Solution:
             remain = target - num
             if remain in hashmap.keys() and idx != hashmap[remain]:
                 return [idx, hashmap[remain]]
+                

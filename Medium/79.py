@@ -31,3 +31,33 @@ class Solution:
             for j in range(n):
                 backtracking(i, j, 0)
         return is_find
+
+
+class Solution:
+    """
+    自己二次复习, 时间复杂度 O(MN . 4^k), 空间复杂度 O(k).
+    M = 矩阵行数, N = 矩阵列数, k = 目标字符的长度
+    """
+    def exist(self, board: List[List[str]], word: str) -> bool:
+        m, n = len(board), len(board[0])
+
+        def backtracking(i, j, start):
+            if start == len(word):
+                return True
+            if i < 0 or j < 0 or i >= m or j >= n or board[i][j] == '#':
+                return False
+            if word[start] == board[i][j]:
+                tmp = board[i][j]
+                board[i][j] = '#'
+                for x, y in [(i-1, j), (i+1, j), (i, j-1), (i, j+1)]:
+                    if backtracking(x, y, start + 1):
+                        return True
+                board[i][j] = tmp
+            return False
+        
+        for i in range(m):
+            for j in range(n):
+                if board[i][j] == word[0]:
+                    if backtracking(i, j, 0):
+                        return True
+        return False

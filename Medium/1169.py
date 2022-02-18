@@ -30,3 +30,23 @@ class Solution:
                         idx.add(j)
                 j += 1
         return res
+
+class Solution:
+    def invalidTransactions(self, transactions: List[str]) -> List[str]:
+        trans = [t.split(',') for t in transactions]
+        res = []
+        for i in range(len(transactions)):
+            name, time, amount, city = trans[i]
+            # total amount invalid
+            if int(amount) > 1000:
+                res.append(transactions[i])
+                continue
+            # check from the beginning of the transactions to see if there is time invalid
+            for j in range(len(transactions)):
+                if i == j:
+                    continue
+                n, t, a, c = trans[j]
+                if n == name and abs(int(t) - int(time)) <= 60 and city != c:
+                    res.append(transactions[i])
+                    break
+        return res
