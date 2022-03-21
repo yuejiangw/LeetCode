@@ -3,14 +3,16 @@ from typing import List
 
 class Solution:
     def reorderLogFiles(self, logs: List[str]) -> List[str]:
-        letter_logs = []
+        # T: O(nlogn)
+        # S: O(n)
+        # 这里的 n 是 logs 里所有的 log 的内容总和
+        char_logs = []
         digit_logs = []
         for log in logs:
-            if '0' <= log.split(' ')[1][0] <= '9':
+            if log.split()[1][0].isdigit():
                 digit_logs.append(log)
             else:
-                letter_logs.append(log)
-        letter_logs = sorted(letter_logs, key=lambda s: (
-            s.split(' ', 1)[1], s.split(' ', 1)[0]))
-        letter_logs.extend(digit_logs)
-        return letter_logs
+                char_logs.append(log)
+
+        char_logs = sorted(char_logs, key=lambda x: (x[x.index(' ')+1:], x.split()[0]))
+        return char_logs + digit_logs
