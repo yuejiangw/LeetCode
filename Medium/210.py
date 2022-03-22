@@ -31,3 +31,41 @@ class Solution:
                     topo_dict[node][0].remove(k)
                 del topo_dict[k]
         return res
+
+
+from typing import List
+from collections import deque
+
+
+class Solution:
+    # BFS版本
+    def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
+        graph = [[] for _ in range(numCourses)] # 邻接表
+        indegree = [0] * numCourses # 入度
+        for b, a in prerequisites:
+            graph[a].append(b)
+            indegree[b] += 1
+        
+        # 根据入度初始化队列中的结点（入度为0）
+        queue = deque()
+        for i in range(numCourses):
+            if indegree[i] == 0:
+                queue.append(i)
+        
+        count = 0
+        res = []
+        
+        # BFS
+        while queue:
+            node = queue.popleft()
+            count += 1
+            res.append(node)
+            for adj in graph[node]:
+                indegree[adj] -= 1
+                if indegree[adj] == 0:
+                    queue.append(adj)
+        
+        # 图中有环, 无法拓扑排序
+        if count != numCourses:
+            return []
+        return res
