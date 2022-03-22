@@ -64,3 +64,35 @@ class Solution:
                 bfs(graph, node, visited)
                 res += 1
         return res
+
+
+# 并查集解法
+class UnionFind(object):
+    def __init__(self, count):
+        self.count = count
+        self.parent = [0] * count
+        for i in range(count):
+            self.parent[i] = i
+    
+    def _find(self, x):
+        while x != self.parent[x]:
+            self.parent[x] = self.parent[self.parent[x]]
+            x = self.parent[x]
+        return x
+    
+    def union(self, p, q):
+        root_p, root_q = self._find(p), self._find(q)
+        if root_p == root_q:
+            return
+        self.parent[root_p] = root_q
+        self.count -= 1
+
+class Solution:
+    def countComponents(self, n: int, edges: List[List[int]]) -> int:
+        # 并查集
+        # T: O(N)
+        # S: O(N)
+        uf = UnionFind(n)
+        for p, q in edges:
+            uf.union(p, q)
+        return uf.count
