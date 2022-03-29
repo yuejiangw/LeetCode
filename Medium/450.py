@@ -25,4 +25,25 @@ class Solution:
         if root.val < key:
             root.right = self.deleteNode(root.right, key)
         return root
-        
+
+
+class Solution:
+    def find_min(self, root) -> TreeNode:
+        curr = root
+        while curr.left:
+            curr = curr.left
+        return curr
+
+    def deleteNode(self, root: Optional[TreeNode], key: int) -> Optional[TreeNode]:
+        if not root: return None
+        if root.val < key:
+            root.right = self.deleteNode(root.right, key)
+        elif root.val > key:
+            root.left = self.deleteNode(root.left, key)
+        else:
+            if root.left is None: return root.right
+            if root.right is None: return root.left
+            min_node = self.find_min(root.right)
+            root.val = min_node.val
+            root.right = self.deleteNode(root.right, root.val)
+        return root
