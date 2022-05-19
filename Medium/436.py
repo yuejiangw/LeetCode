@@ -3,6 +3,8 @@ from typing import List
 
 class Solution:
     def findRightInterval(self, intervals: List[List[int]]) -> List[int]:
+        # T: O(nlogn)
+        # S: O(n)
         start = []  # 存储每个区间的开始坐标和在数组中的下标
         for i, interval in enumerate(intervals):
             start.append([interval[0], i])
