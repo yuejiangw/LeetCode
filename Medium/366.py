@@ -4,22 +4,24 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
-from collections import defaultdict
 from typing import List
-
+from collections import OrderedDict
 class Solution:
     def findLeaves(self, root: TreeNode) -> List[List[int]]:
-        res = defaultdict(list)
-        # 后序遍历获取高度，叶子节点高度为1
-        def get_height(root):
+        res = OrderedDict()
+
+        def max_height(root: TreeNode):
             if not root:
                 return 0
-            left = get_height(root.left)
-            right = get_height(root.right)
-            height = max(left, right) + 1
-            # 按照高度划分叶子结点，插入哈希表
-            res[height].append(root.val)
-            return height
+            # 后序遍历获取高度，叶子节点高度为1
+            left = max_height(root.left)
+            right = max_height(root.right)
+            h = max(left, right) + 1
+            if not res.get(h):
+                res[h] = []
+            # 按照高度划分叶子节点，存入哈希表
+            res[h].append(root.val)
+            return h
 
-        get_height(root)
+        max_height(root)
         return list(res.values())
