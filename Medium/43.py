@@ -2,13 +2,6 @@ class Solution:
     def multiply(self, num1: str, num2: str) -> str:
         # T: O(MN)
         # S: O(M + N)
-        
-        if num1 == '0' or num2 == '0':
-            return '0'
-        if num1 == '1':
-            return num2
-        if num2 == '1':
-            return num1
 
         m, n = len(num1), len(num2)
         # 结果至多有 m + n 位 数字
@@ -25,4 +18,6 @@ class Solution:
         i = 0
         while i < len(res) and res[i] == 0:
             i += 1
-        return ''.join(map(str, res[i:]))
+        
+        res = ''.join(map(str, res[i:]))
+        return '0' if not res else res
