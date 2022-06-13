@@ -1,5 +1,7 @@
 class Solution(object):
     def candyCrush(self, board):
+        # T: O((RC)^2)
+        # S: O(1)
         R, C = len(board), len(board[0])
         todo = False
 
