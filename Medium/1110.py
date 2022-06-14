@@ -9,7 +9,7 @@ from typing import List
 
 class Solution:
     def delNodes(self, root: TreeNode, to_delete: List[int]) -> List[TreeNode]:
-        self.del_set = set()
+        self.del_set = set(to_delete)
         self.res = []
 
         # 输入一颗二叉树, 删除 del_set 中的节点, 返回删除完成后的根节点
@@ -28,9 +28,5 @@ class Solution:
 
             return None if need_delete else root
 
-        if not root:
-            return []
-        for d in to_delete:
-            self.del_set.add(d)
         do_del(root, False)
         return self.res            
