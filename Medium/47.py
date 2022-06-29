@@ -5,6 +5,7 @@ class Solution:
         res = []
         path = []
         used = [False] * len(nums)
+
         def backtracking(nums, used):
             if len(path) == len(nums):
                 res.append(path[:])
@@ -18,5 +19,6 @@ class Solution:
                     backtracking(nums, used)
                     path.pop()
                     used[i] = False
+                    
         backtracking(sorted(nums), used)
         return res
