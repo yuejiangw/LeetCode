@@ -2,6 +2,7 @@ from typing import List
 
 class Solution:
     def maxArea(self, height: List[int]) -> int:
+        # T: O(N), S: O(1)
         if len(height) == 2:
             return min(height)
         i = 0 
