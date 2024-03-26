@@ -44,13 +44,16 @@ class Solution:
                 tmp = nums[i] + nums[j]
                 left, right = nums[i], nums[j]
                 if tmp < target:
+                    # 去重
                     while i < j and nums[i] == left:
                         i += 1
                 elif tmp > target:
+                    # 去重
                     while i < j and nums[j] == right:
                         j -= 1
                 else:
                     res.append([i, j])
+                    # 去重
                     while i < j and nums[i] == left:
                         i += 1
                     while i < j and nums[j] == right:
@@ -67,6 +70,7 @@ class Solution:
             tuples = two_sum(nums, i + 1, -nums[i])
             for j, k in tuples:
                 res.append([nums[i], nums[j], nums[k]])
+            # 去重
             while i < len(nums) - 1 and nums[i] == nums[i + 1]:
                 i += 1
             i += 1
