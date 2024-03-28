@@ -46,7 +46,10 @@ class Solution:
     
 class Solution:
     def fourSum(self, nums: List[int], target: int) -> List[List[int]]:
-        """通用解法"""
+        """
+        通用解法
+        T: O(N^3), S: O(N)
+        """
         def nSum(nums, n, start, target):
             res = []
             if n < 2:
