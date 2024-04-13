@@ -11,6 +11,7 @@ class Solution:
     def getIntersectionNode(self, headA: ListNode, headB: ListNode) -> ListNode:
         if not headA or not headB:
             return None
+        # 如果有环则一定会相遇，如果没有环则一定会走到尽头，两个指针都是 none 循环结束
         p_a, p_b = headA, headB
         while p_a != p_b:
             if p_a:

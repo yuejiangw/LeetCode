@@ -23,3 +23,23 @@ class Solution:
             first = first.next
             count += 1
         return dummy_head.next
+
+
+# 2024.04.12
+
+class Solution:
+    def detectCycle(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        # 快慢指针, fast 一次走一步, slow 一次走两步
+        # 如果有环的话 fast 指针一定会追上 slow 指针
+        # 之后再把快指针重新放在链表头部一次走一步, 第二次相遇的位置就是环的起点
+        fast, slow = head, head
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+            if slow == fast:
+                fast = head
+                while fast != slow:
+                    fast = fast.next
+                    slow = slow.next
+                return fast
+        return None
