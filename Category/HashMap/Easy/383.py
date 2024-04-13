@@ -11,3 +11,8 @@ class Solution:
                 if v > m[k]:
                     return False
         return True
+
+# 2024.04.12
+class Solution:
+    def canConstruct(self, ransomNote: str, magazine: str) -> bool:
+        return Counter(magazine) >= Counter(ransomNote)

@@ -9,3 +9,10 @@ class Solution:
             return True
         else:
             return False
+        
+# 2024.04.12
+from collections import Counter
+
+class Solution:
+    def isAnagram(self, s: str, t: str) -> bool:
+        return Counter(s) == Counter(t)

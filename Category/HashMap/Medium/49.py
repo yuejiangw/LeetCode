@@ -1,4 +1,25 @@
 from typing import List
+from collections import defaultdict
+
+# 2024.04.12
+class Solution:
+    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
+        # 关键在于对 s 进行编码
+        # 设 strs 中最长的字符串长度为 n, strs 的长度为 m，则时间复杂度为 O(mn)
+        # 空间复杂度为 O(m)
+        def encode(s: str) -> str:
+            chars = [0] * 26
+            for c in s:
+                idx = ord(c) - ord('a')
+                chars[idx] += 1
+            return str(chars)
+        
+        group = defaultdict(list)
+        for s in strs:
+            key = encode(s)
+            group[key].append(s)
+        return list(group.values())
+
 
 class Solution:
     def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
