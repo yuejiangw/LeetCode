@@ -17,3 +17,20 @@ class Solution:
             if n == 1:
                 return True
         return False
+    
+# 2024.04.12
+class Solution:
+    def isHappy(self, n: int) -> bool:
+        # T: O(logn), S: O(logn)
+        def transform(n: int) -> int:
+            res = 0
+            while n:
+                res += pow((n % 10), 2)
+                n = n // 10
+            return res
+
+        temp_results = set()
+        while n != 1 and n not in temp_results:
+            temp_results.add(n)
+            n = transform(n)
+        return True if n == 1 else False
