@@ -75,3 +75,41 @@ class Solution:
                 i += 1
             i += 1
         return res
+
+# 2024.04.24
+class Solution:
+    """通用解法，nSum"""
+    def threeSum(self, nums: List[int]) -> List[List[int]]:
+        # 数组要先排序，之后用双指针
+        def nSum(n: int, nums: List[int], start: int, target: int):
+            if n == 2:
+                i, j = start, len(nums) - 1
+                res = []
+                while i < j:
+                    m, n = nums[i], nums[j]
+                    if m + n < target:
+                        i += 1
+                    elif m + n > target:
+                        j -= 1
+                    else:
+                        res.append([m, n])
+                        # 去重
+                        while i < j and nums[i] == m: i += 1
+                        while i < j and nums[j] == n: j -= 1
+                return res
+            else:
+                res = []
+                i = start
+                while i < len(nums):
+                    tmp_result = nSum(n - 1, nums, i + 1, target - nums[i])
+                    for tmp in tmp_result:
+                        tmp.append(nums[i])
+                        res.append(tmp)
+                    # 去重
+                    while i < len(nums) - 1 and nums[i + 1] == nums[i]:
+                        i += 1
+                    i += 1
+                return res
+        
+        nums.sort()
+        return nSum(3, nums, 0, 0)
