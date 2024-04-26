@@ -2,6 +2,7 @@ from collections import deque
 
 
 class MyStack:
+    """其实这道题一个队列就够了，在 pop 的时候把队列里的元素一个一个取出来再放回去就行了，需要借助 queue size 来实现。"""
 
     def __init__(self):
         self.queue_master = deque()
