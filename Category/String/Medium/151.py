@@ -1,3 +1,14 @@
+# 2024-04-24
+class Solution:
+    def reverseWords(self, s: str) -> str:
+        # 先反转 s 再反转每个单词
+        # e.g., s = "the sky is blue", 反转之后为 "eulb si yks"
+        # 再反转每个单词, 为 "blue is sky"
+        s = s[::-1]
+        s = [x[::-1] for x in s.split(' ') if x != '']
+        return ' '.join(s)
+
+
 class Solution:
     def reverseWords(self, s: str) -> str:
         """正常做法，不调用任何api"""
