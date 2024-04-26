@@ -2,6 +2,34 @@ import heapq
 from collections import Counter
 from typing import List
 
+# 2024-04-26
+from collections import Counter
+from heapq import *
+
+class Solution:
+    # def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+    #     # 大顶堆解法, T: O(nlogn), S: O(n)，不是最优
+    #     cnt = Counter(nums)
+    #     heap = []
+    #     res = []
+    #     for key, val in cnt.items():
+    #         heappush(heap, (-val, key))
+        
+    #     for _ in range(k):
+    #         res.append(heappop(heap)[1])
+    #     return res
+
+    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+        # 小顶堆解法，T: O(nlogk), S: O(n)
+        cnt = Counter(nums)
+        heap = []
+        for key, val in cnt.items():
+            heappush(heap, (val, key))
+            if len(heap) > k:
+                heappop(heap)
+        # 最后堆中剩下的就是前 k 个大的数
+        return [item[1] for item in heap]
+
 class Solution:
     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
         hash_map = {}
