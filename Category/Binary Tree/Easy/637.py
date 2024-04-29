@@ -5,6 +5,29 @@
 #         self.left = left
 #         self.right = right
 from collections import deque
+
+# 2024-04-26
+class Solution:
+    def averageOfLevels(self, root: Optional[TreeNode]) -> List[float]:
+        # 我们不需要存储每一层的节点，只需要存储每一层的和
+        res = []
+        queue = deque()
+        if root:
+            queue.append(root)
+        while queue:
+            l = len(queue)
+            level = 0
+            for _ in range(l):
+                node = queue.popleft()
+                level += node.val
+                if node.left:
+                    queue.append(node.left)
+                if node.right:
+                    queue.append(node.right)
+            res.append(level / l)
+        return res
+
+
 class Solution:
     def averageOfLevels(self, root: TreeNode) -> List[float]:
         

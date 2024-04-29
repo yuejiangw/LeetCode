@@ -12,20 +12,17 @@ class Solution:
     def connect(self, root: 'Node') -> 'Node':
         if not root:
             return None
-        queue = deque()
-        queue.append(root)
+        queue = deque([root])
         while queue:
-            size = len(queue)
+            l = len(queue)
             pre = None
-            for i in range(size):
-                if i == 0:
-                    node = queue.popleft()
-                    pre = node
-                else:
-                    node = queue.popleft()
+            for _ in range(l):
+                node = queue.popleft()
+                if pre:
                     pre.next = node
-                    pre = node
-                if node.left: queue.append(node.left)
-                if node.right: queue.append(node.right)
-            pre.next = None
+                pre = node
+                if node.left:
+                    queue.append(node.left)
+                if node.right:
+                    queue.append(node.right)
         return root

@@ -1,4 +1,5 @@
 from typing import List
+from collections import deque
 
 # Definition for a binary tree node.
 class TreeNode:
@@ -6,6 +7,24 @@ class TreeNode:
         self.val = val
         self.left = left
         self.right = right
+
+# 2024-04-26
+class Solution:
+    def preorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+        # 迭代法，中左右遍历
+        stack = deque()
+        res = []
+        while root or stack:
+            # 如果已经走到了叶子节点，则处理右子树
+            if not root:
+                root = stack.pop().right
+            res.append(root.val)
+            # 如果有右子树，则当前节点要入栈以便后续处理
+            if root.right:      
+                stack.append(root)
+            # 去左子树
+            root = root.left
+        return res
 
 class Solution:
     """前序遍历：中，左，右"""
