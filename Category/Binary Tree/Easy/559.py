@@ -6,8 +6,25 @@ class Node:
         self.children = children
 """
 
+# BFS
 class Solution:
     def maxDepth(self, root: 'Node') -> int:
+        if not root:
+            return 0
+        queue = deque([root])
+        res = 0
+        while queue:
+            l = len(queue)
+            for _ in range(l):
+                node = queue.popleft()
+                for child in node.children:
+                    queue.append(child)
+            res += 1
+        return res
+
+class Solution:
+    def maxDepth(self, root: 'Node') -> int:
+        # T: O(n), S: O(n)
         def get_depth(root):
             if not root:
                 return 0
