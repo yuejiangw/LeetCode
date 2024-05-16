@@ -41,3 +41,26 @@ class Solution:
         if len(inorder) ==0 or len(postorder) == 0:
             return None
         return traversal(inorder, postorder)
+    
+class Solution:
+    def buildTree(self, inorder: List[int], postorder: List[int]) -> Optional[TreeNode]:
+        def traversal(inorder, postorder):
+            if len(postorder) == 0:
+                return None
+            # 根的值就是 postorder 中最后一个元素的值
+            root_val = postorder[-1]
+            root = TreeNode(root_val)
+            # 在 inorder/postorder 中根据 root_val 确定左右子树的 sublist
+            root_idx = inorder.index(root_val)
+            left_inorder = inorder[:root_idx]
+            right_inorder = inorder[root_idx + 1:]
+            # 根据 inorder 的长度来切割 postorder
+            left_postorder = postorder[:len(left_inorder)]
+            right_postorder = postorder[len(left_inorder):-1]
+            # 构造左右子树
+            root.left = traversal(left_inorder, left_postorder)
+            root.right = traversal(right_inorder, right_postorder)
+            # 返回结果
+            return root
+        
+        return traversal(inorder, postorder)
