@@ -34,3 +34,28 @@ class Solution:
         traverse(root, targetSum)
         return res
             
+class Solution:
+    # 优化：不用每次都计算 sum，而是作为参数一起进行回溯
+    def pathSum(self, root: Optional[TreeNode], targetSum: int) -> List[List[int]]:
+        if not root:
+            return []
+        
+        path = [root.val]
+        res = []
+
+        def traversal(root, target):
+            if root.left == None and root.right == None:
+                if target == 0:
+                    res.append(path[:])
+                return
+            if root.left:
+                path.append(root.left.val)
+                traversal(root.left, target - root.left.val)
+                path.pop()
+            if root.right:
+                path.append(root.right.val)
+                traversal(root.right, target - root.right.val)
+                path.pop()
+        
+        traversal(root, targetSum - root.val)
+        return res
