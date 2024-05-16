@@ -37,3 +37,25 @@ class Solution:
         if len(preorder) == 0 or len(inorder) == 0:
             return None
         return traverse(preorder, inorder)
+
+class Solution:
+    def buildTree(self, preorder: List[int], inorder: List[int]) -> Optional[TreeNode]:
+        def traversal(preorder, inorder):
+            if len(preorder) == 0:
+                return None
+            # 根据 preorder 获取 root val
+            root_val = preorder[0]
+            root = TreeNode(root_val)
+            # 根据 root val 的下标切割 preorder 和 inorder
+            root_idx = inorder.index(root_val)
+            left_inorder = inorder[:root_idx]
+            right_inorder = inorder[root_idx + 1:]
+            # 根据 inorder 左右子数组长度切割 preorder
+            left_preorder = preorder[1: 1 + len(left_inorder)]
+            right_preorder = preorder[1 + len(left_inorder):]
+            # 构造左右子树
+            root.left = traversal(left_preorder, left_inorder)
+            root.right = traversal(right_preorder, right_inorder)
+            # 返回
+            return root
+        return traversal(preorder, inorder)
