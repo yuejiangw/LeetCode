@@ -5,6 +5,28 @@
 #         self.left = left
 #         self.right = right
 class Solution:
+    # 借助全局最大值来进行比较
+    max_val = float('-inf')
+
+    def isValidBST(self, root: Optional[TreeNode]) -> bool:
+        # BST 性质: 中序遍历会得到一个从小到大的有序数组
+        # 我们用 max_val 代表遍历过的节点中的最大值
+        def traversal(root):
+            if not root:
+                return True
+            # 中序遍历
+            left = traversal(root.left)
+            # 如果当前节点的值小于等于 max_val 则说明不是 BST
+            if root.val <= self.max_val:
+                return False
+            else:
+                self.max_val = root.val
+            right = traversal(root.right)
+            return left and right
+        
+        return traversal(root)
+    
+class Solution:
     def isValidBST(self, root: TreeNode) -> bool:
         path = []
         def inorder_traverse(root):

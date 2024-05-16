@@ -14,3 +14,12 @@ class Solution:
             return self.searchBST(root.right, val)
         if root.val > val:
             return self.searchBST(root.left, val)
+    
+    # 迭代法
+    def searchBST(self, root: Optional[TreeNode], val: int) -> Optional[TreeNode]:
+        while root and root.val != val:
+            if root.val > val:
+                root = root.left
+            elif root.val < val:
+                root = root.right
+        return root
