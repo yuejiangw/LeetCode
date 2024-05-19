@@ -25,3 +25,24 @@ class Solution:
             return result
         backtracking(k, n, 1)
         return result
+    
+class Solution:
+    def combinationSum3(self, k: int, n: int) -> List[List[int]]:
+        res = []
+        path = []
+
+        def backtracking(start, sum):
+            # 把 sum 放进递归参数中可以省略求 sum 的时间复杂度
+            if sum > n:
+                return
+            if len(path) == k:
+                if sum == n:
+                    res.append(path[:])
+                return
+            for i in range(start, 10):
+                path.append(i)
+                backtracking(i + 1, sum + i)
+                path.pop()
+        
+        backtracking(1, 0)
+        return res
