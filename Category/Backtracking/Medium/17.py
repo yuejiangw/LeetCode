@@ -1,6 +1,8 @@
 from typing import List
 class Solution:
     def letterCombinations(self, digits: str) -> List[str]:
+        # T: O(4^N * N)
+        # S: O(N)
         if not digits:
             return []
         letter_map = ['', '', 'abc', 'def', 'ghi', 'jkl', 'mno', 'pqrs', 'tuv', 'wxyz']
