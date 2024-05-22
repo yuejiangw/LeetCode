@@ -5,13 +5,15 @@ class Solution:
         board = [['.' for _ in range(n)] for _ in range(n)]
         res = []
 
+        # is_valid 只检查了左上和右上还有同列，是因为我们是从上到下
+        # 逐行放置棋子，当前行下面的行还没有放置
         def is_valid(board, i, j, n):
-            # no queen on the same row or the same column
+            # 检查列
             for row in range(n):
                 if board[row][j] == 'Q':
                     return False
 
-            # no queen on left up, left down
+            # 检查左上
             row = i - 1
             col = j - 1
             while row >= 0 and col >= 0:
@@ -20,7 +22,7 @@ class Solution:
                 row -= 1
                 col -= 1
 
-            # no queen on right up, right down
+            # 检查右上
             row = i - 1
             col = j + 1
             while row < n and col < n:
