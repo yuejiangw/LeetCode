@@ -2,6 +2,7 @@ from typing import List
 
 class Solution:
     def wiggleMaxLength(self, nums: List[int]) -> int:
+        # 记录峰值数量
         if len(nums) <= 1:
             return len(nums)
         pre_diff = 0
