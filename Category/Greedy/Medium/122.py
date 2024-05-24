@@ -1,4 +1,20 @@
 from typing import List
+
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+        # Greedy，尽可能找低价买入，只要当前股价比买入价高就卖出，尽可能多频次地交易
+        res = 0
+        curr_val = prices[0]
+        for i in range(1, len(prices)):
+            # 找到了更便宜的买入价
+            if prices[i] <= curr_val:
+                curr_val = prices[i]
+            else:
+                # 卖出股票
+                res += prices[i] - curr_val
+                curr_val = prices[i]
+        return res
+
 class Solution:
     def maxProfit(self, prices: List[int]) -> int:
         if len(prices) <= 1:
