@@ -1,43 +1,15 @@
 # LeetCode
 
-My record of the solutions for LeetCode problems. The solutions are mainly based on Python, and are divided into three parts according the problems' difficulty.
+## Introduction
 
+个人 LeetCode 练习记录，基于 Python3 实现。对于已完成题目按照类别和难度进行了分类归纳，以供参考。
 
-
-### Schedule:
-
-#### Algorithms
-
-|     Categories      | Is Done? |
-| :-----------------: | :------: |
-|    Two pointers     |   yes    |
-|        Sort         |   yes    |
-|       Greedy        |          |
-|    Binary Search    |          |
-| Divide and Conquer  |          |
-|       Search        |          |
-| Dynamic Programming |          |
-|        Math         |          |
-
-
-
-#### Data Structure
-
-|    Categories    | Is Done? |
-| :--------------: | :------: |
-|   Linked List    |   yes    |
-|       Tree       |   yes    |
-| Stack and Queue  |   yes    |
-|     Hash Map     |   yes    |
-|      String      |   yes    |
-| Array and Matrix |   yes    |
-|      Graph       |          |
-|       Bits       |          |
-
-
-
-### Reference:
+## Reference:
 
 https://www.cyc2018.xyz/
 
 [代码随想录](https://programmercarl.com/)
+
+[labuladong算法小抄](https://labuladong.online/algo/)
+
+[宫水三叶刷题日记](https://github.com/SharingSource/LogicStack-LeetCode/wiki/DFS)
