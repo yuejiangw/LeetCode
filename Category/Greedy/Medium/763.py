@@ -3,6 +3,25 @@ from collections import List
 
 class Solution:
     def partitionLabels(self, s: str) -> List[int]:
+        # 找最近结束位置划分
+        # 记录字符出现的最后的位置
+        position = {}
+        for idx, val in enumerate(s):
+            position[val] = idx
+        
+        res = []
+        left = 0
+        right = 0
+        for i in range(len(s)):
+            right = max(right, position[s[i]])
+            if i == right:
+                res.append(right - left + 1)
+                left = i + 1
+        return res
+
+
+class Solution:
+    def partitionLabels(self, s: str) -> List[int]:
         position = OrderedDict()
         for i in range(len(s)):
             if s[i] not in position:
