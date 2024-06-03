@@ -3,19 +3,18 @@ from typing import List
 
 class SparseVector:
     def __init__(self, nums: List[int]):
-        self.index = set()
-        self.vector = {}
-        for i, n in enumerate(nums):
+        # 稀疏矩阵，我们只存储非零位置即可
+        self.matrix = {}
+        for idx, n in enumerate(nums):
             if n != 0:
-                self.index.add(i)
-                self.vector[i] = n
+                self.matrix[idx] = n
 
     # Return the dotProduct of two sparse vectors
     def dotProduct(self, vec: 'SparseVector') -> int:
-        valid_idx = self.index & vec.index
         res = 0
-        for i in valid_idx:
-            res += self.vector[i] * vec.vector[i]
+        for k, v in self.matrix.items():
+            if k in vec.matrix:
+                res += v * vec.matrix[k]
         return res
 
 # Your SparseVector object will be instantiated and called as such:
