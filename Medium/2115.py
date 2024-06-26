@@ -9,7 +9,7 @@ class Solution:
         根据 ingredient 和 recipy 之间的关系建立依赖图并记录每个 recipy 的入度
         之后进行拓扑排序
         """
-        # 假设 len(recipies) = n, d 是每一个 recipy 的最大长度, len(supplies) = m
+        # 假设 len(recipes) = n, d 是每一个 recipe 的最大长度, len(supplies) = m
         # T: O(dn + m)
         # S: O(dn + m)
         n = len(recipes)
