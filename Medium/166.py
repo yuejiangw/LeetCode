@@ -1,5 +1,6 @@
 class Solution:
     def fractionToDecimal(self, numerator: int, denominator: int) -> str:
+        # 时间空间复杂度取决于最终答案的长度
         # 如果两数可以整除直接返回结果
         if numerator % denominator == 0:
             return str(numerator // denominator)
