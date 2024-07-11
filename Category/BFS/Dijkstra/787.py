@@ -1,5 +1,39 @@
 import heapq
 
+class Solution:
+    def findCheapestPrice(self, n: int, flights: List[List[int]], src: int, dst: int, k: int) -> int:
+        graph = defaultdict(list)
+        for f, t, p in flights:
+            graph[f].append((t, p))
+        
+        priceFromSrc = [float('inf')] * n
+        stopsFromSrc = [float('inf')] * n
+
+        # init
+        priceFromSrc[src] = 0
+        stopsFromSrc[src] = 0
+
+        # dijkstra
+        heap = [(0, src, 0)]    # price, id, stop
+        while heap:
+            currPrice, currId, currStop = heappop(heap)
+            if currId == dst:
+                return currPrice
+            if currStop == k + 1:
+                continue
+            for nextId, nextPrice in graph[currId]:
+                totalPrice = nextPrice + currPrice
+                totalStop = currStop + 1
+                if totalPrice < priceFromSrc[nextId]:
+                    priceFromSrc[nextId] = totalPrice
+                    stopsFromSrc[nextId] = totalStop
+                if totalPrice > priceFromSrc[nextId] and totalStop > stopsFromSrc[nextId]:
+                    continue
+                heappush(heap, (totalPrice, nextId, totalStop))
+        
+        return -1
+
+
 class State:
     def __init__(self, id: int, costFromSrc: int, nodeNumFromSrc: int) -> None:
         self.id = id
