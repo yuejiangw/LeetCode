@@ -6,7 +6,7 @@
 #         self.right = right
 class Solution:
     first = None
-    secon = None
+    second = None
     pre = TreeNode(float('-inf'))
     def recoverTree(self, root: Optional[TreeNode]) -> None:
         """
