@@ -1,3 +1,5 @@
+from typing import List
+
 class Solution:
     def closestPrimes(self, left: int, right: int) -> List[int]:
         # 找到 left 和 right 中间所有的素数，然后遍历作差
