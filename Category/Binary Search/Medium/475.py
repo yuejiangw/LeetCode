@@ -2,6 +2,9 @@ from typing import List
 
 class Solution:
     def findRadius(self, houses: List[int], heaters: List[int]) -> int:
+        # m = len(houses), n = len(heaters), L = 二分的初始长度
+        # T: O(mlogm + nlong + max(m, n) * logL) = O(max(m, n) * logL)
+        # S: O(logm + logn)
         houses.sort()
         heaters.sort()
 
