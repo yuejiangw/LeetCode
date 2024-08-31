@@ -25,3 +25,19 @@ class Solution:
             else:
                 res[-1][1] = max(res[-1][1], interval[1])
         return res
+
+class Solution:
+    def merge(self, intervals: List[List[int]]) -> List[List[int]]:
+        res = []
+        intervals.sort(key=lambda x: (x[0], x[1]))
+        i = 0
+        while i < len(intervals):
+            start, end = intervals[i]
+            j = i + 1
+            while j < len(intervals) and intervals[j][0] <= end:
+                start = min(start, intervals[j][0])
+                end = max(end, intervals[j][1])
+                j += 1
+            i = j
+            res.append([start, end])
+        return res
