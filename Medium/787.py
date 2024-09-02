@@ -1,4 +1,5 @@
 import heapq
+from typing import List
 
 class State:
     def __init__(self, id: int, costFromSrc: int, nodeNumFromSrc: int) -> None:

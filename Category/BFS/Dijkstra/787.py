@@ -1,4 +1,4 @@
-from heapq import *
+import heapq
 from typing import List
 from collections import defaultdict
 
@@ -18,11 +18,11 @@ class Solution:
         # dijkstra
         heap = [(0, src, 0)]    # price, id, stop
         while heap:
-            currPrice, currId, currStop = heappop(heap)
+            currPrice, currId, currStop = heapq.heappop(heap)
+            if currStop > k + 1:
+                continue
             if currId == dst:
                 return currPrice
-            if currStop == k + 1:
-                continue
             for nextId, nextPrice in graph[currId]:
                 totalPrice = nextPrice + currPrice
                 totalStop = currStop + 1
@@ -31,7 +31,7 @@ class Solution:
                     stopsFromSrc[nextId] = totalStop
                 if totalPrice > priceFromSrc[nextId] and totalStop > stopsFromSrc[nextId]:
                     continue
-                heappush(heap, (totalPrice, nextId, totalStop))
+                heapq.heappush(heap, (totalPrice, nextId, totalStop))
         
         return -1
 
