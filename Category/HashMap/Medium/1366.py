@@ -12,4 +12,3 @@ class Solution:
                 score[char][i] -= 1
         res = sorted(votes[0], key=lambda x: (score[x], x))
         return ''.join(res)
-        
