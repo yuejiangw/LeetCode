@@ -11,6 +11,7 @@ from typing import List, Optional
 class Solution:
     def verticalOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
         """BFS"""
+        # T: O(n), S: O(n)
         if not root:
             return []
         nodes = defaultdict(list)
