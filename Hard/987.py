@@ -5,6 +5,36 @@
 #         self.left = left
 #         self.right = right
 from typing import List
+from collections import deque, defaultdict
+
+
+class Solution:
+    def verticalTraversal(self, root: Optional[TreeNode]) -> List[List[int]]:
+        '''
+        层序遍历 + 局部排序
+        k = width of the tree, N = number of nodes in the tree
+        T: O(Nlog(N/k))
+        S: O(N)
+        '''
+        res = []
+        if not root:
+            return res
+        col_2_values = defaultdict(list)
+        min_col, max_col = float('inf'), float('-inf')
+        queue = deque()
+        queue.append([root, 0, 0])
+        while queue:
+            node, row, col = queue.popleft()
+            col_2_values[col].append((row, node.val))
+            min_col = min(min_col, col)
+            max_col = max(max_col, col)
+            if node.left:
+                queue.append([node.left, row + 1, col - 1])
+            if node.right:
+                queue.append([node.right, row + 1, col + 1])
+        for c in range(min_col, max_col + 1):
+            res.append([item[1] for item in sorted(col_2_values[c])])
+        return res
 
 
 class Solution:
