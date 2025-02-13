@@ -3,6 +3,39 @@ from collections import Counter
 
 class Solution:
     def minWindow(self, s: str, t: str) -> str:
+        '''
+        使用哈希表来判断 t 中的字符是否已经全部在子串中出现过，一个坑是当窗口刚好收缩到不符合条件的情况时，要跳过所有不在 t 中的字符
+        这样才能保证收集到的 res 是最短的
+        '''
+        cnt = Counter(t)
+        matched = set()
+        i, j = 0, 0
+        window = defaultdict(int)
+        res = s + s
+        while j < len(s):
+            c = s[j]
+            j += 1
+            if c in cnt:
+                window[c] += 1
+                if window[c] >= cnt[c]:
+                    matched.add(c)
+            while i < len(s) and len(matched) >= len(cnt):
+                # collect the result before shrinking the window
+                res = min(res, s[i: j], key=len)
+                d = s[i]
+                i += 1
+                window[d] -= 1
+                if d in cnt and window[d] < cnt[d]:
+                    matched.remove(d)
+            # skip all the characters that are not contained in t
+            while i < len(s) and s[i] not in cnt:
+                i += 1
+            
+        return '' if res == s + s else res
+
+
+class Solution:
+    def minWindow(self, s: str, t: str) -> str:
         if s == t:
             return s
         if len(s) < len(t):
@@ -39,7 +72,7 @@ class Solution:
     def minWindow(self, s: str, t: str) -> str:
         window = defaultdict(int)
         need = Counter(t)
-        length = float('inf')   # the lenght of the minimum covered substring
+        length = float('inf')   # the length of the minimum covered substring
         start = 0               # the start index of the minimum covered substring
         valid = 0               # the number of letter that has satisfied the need
         i, j = 0, 0
