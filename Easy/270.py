@@ -6,6 +6,19 @@
 #         self.right = right
 from typing import Optional
 
+class Solution:
+    def closestValue(self, root: Optional[TreeNode], target: float) -> int:
+        # T: O(logN), S: O(1)
+        closest = root.val
+        while root:
+            if abs(root.val - target) < abs(closest - target) or \
+                (abs(root.val - target) == abs(closest - target) and root.val < closest):
+                closest = root.val
+            if target < root.val:
+                root = root.left
+            else:
+                root = root.right
+        return closest
 
 class Solution:
     def closestValue(self, root: Optional[TreeNode], target: float) -> int:
