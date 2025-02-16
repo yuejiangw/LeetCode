@@ -1,4 +1,38 @@
 class Solution:
+    def myAtoi(self, s: str) -> int:
+        s = s.strip()
+
+        if not s:
+            return 0
+        
+        symbol = None        
+        res = 0
+        i = 0
+        if s[i] == '+' or s[i] == '-':
+            symbol = s[i]
+            i += 1
+        while i < len(s):
+            if s[i].isdigit():
+                res = res * 10 + int(s[i])
+            else: 
+                break
+            i += 1
+
+        if res == 0:
+            return res
+        
+        if symbol == '-':
+            res = -res
+
+        if res < -2**31:
+            return -2**31
+        elif res > 2**31 - 1:
+            return 2**31 - 1
+        else:
+            return res
+        
+
+class Solution:
     def isDigit(self, c):
         return (c >= '0' and c <= '9')
     

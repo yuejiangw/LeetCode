@@ -7,8 +7,6 @@ class Solution:
         nums = [lower - 1] + nums + [upper + 1]
         for i in range(len(nums) - 1):
             l, r = nums[i], nums[i + 1]
-            if l + 1 < r - 1:
-                res.append(str(l + 1) + '->' + str(r - 1))
-            elif l + 1 == r - 1:
-                res.append(str(l + 1))
+            if l + 1 <= r - 1:
+                res.append([l + 1, r - 1])
         return res
