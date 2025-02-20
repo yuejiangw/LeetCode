@@ -8,7 +8,7 @@ from collections import deque
 
 
 class BSTIterator:
-
+    # T: O(1), S: O(h)
     def __init__(self, root: TreeNode):
         self.stack = deque()
         while root:

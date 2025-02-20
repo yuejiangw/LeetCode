@@ -3,6 +3,8 @@ from typing import List
 
 class Solution:
     def exclusiveTime(self, n: int, logs: List[str]) -> List[int]:
+        # T: O(n), S: O(n)
+        # 思路：用栈来模拟函数调用，遇到 start 则入栈，遇到 end 则出栈，并计算时间差
         res = [0] * n
         stack = []
         for log in logs:
