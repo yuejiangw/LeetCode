@@ -1,33 +1,20 @@
 from typing import List
+from heapq import heappush, heappop
 
 class Solution:
     def minMeetingRooms(self, intervals: List[List[int]]) -> int:
-        if len(intervals) == 1:
-            return 1
+        # T: O(nlogn), S: O(n)
+        # 按照开始时间排序
+        intervals.sort(key=lambda x: x[0])
+        
+        # 小顶堆，存结束时间
+        heap = []
+        for start, end in intervals:
+            if heap and heap[0] <= start:
+                heappop(heap)
+            heappush(heap, end)
+        return len(heap)
 
-        length = len(intervals)
-        start = [0] * length
-        end = [0] * length
-        for i in range(length):
-            start[i] = intervals[i][0]
-            end[i] = intervals[i][1]
-
-        start.sort()
-        end.sort()
-
-        room = 0
-        active_meeting = 0
-        i, j = 0, 0
-        while i < length and j < length:
-            if start[i] < end[j]:
-                active_meeting += 1
-                i += 1
-            else:
-                active_meeting -= 1
-                j += 1
-            room = max(room, active_meeting)
-
-        return room
 
 
 class Solution:
