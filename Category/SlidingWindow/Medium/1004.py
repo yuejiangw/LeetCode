@@ -1,6 +1,27 @@
 from typing import List
 
 
+# 2025-08-28
+class Solution:
+    def longestOnes(self, nums: List[int], k: int) -> int:
+        l = r = 0
+        res = 0
+        while r < len(nums):
+            # expand
+            c = nums[r]
+            r += 1
+            if c == 0:
+                k -= 1
+            # contract
+            while l < r and k < 0:
+                d = nums[l]
+                l += 1
+                if d == 0:
+                    k += 1
+            # collect
+            res = max(res, r - l)
+        return res
+
 # 2023-07-10
 class Solution:
     def longestOnes(self, nums: List[int], k: int) -> int:
