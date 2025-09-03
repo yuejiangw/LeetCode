@@ -1,31 +1,29 @@
-from collections import Counter
+from collections import Counter, defaultdict
 
 class Solution:
     def minWindow(self, s: str, t: str) -> str:
         cnt = Counter(t)
-        window = Counter()
-        l, r = 0, 0
-        res = ""
-        res_length = float('inf')
+        uncover = len(cnt)
+        window = defaultdict(int)
+        l = r = 0
+        res = ''
         while r < len(s):
-            # 窗口扩张
-            right_char = s[r]
+            c = s[r]
             r += 1
-            # 把右指针指向的字符放入窗口
-            if right_char not in window:
-                window[right_char] = 1
-            else:
-                window[right_char] += 1
-            # 窗口收缩
-            while window >= cnt:
-                # 比较当前 res 长度更新结果
-                if res_length > r - l + 1:
-                    res = s[l: r]
-                    res_length = r - l + 1
-                # 窗口左指针指向的字符移出窗口
-                left_char = s[l]
-                window[left_char] -= 1
-                if window[left_char] == 0:
-                    del window[left_char]
+            window[c] += 1
+            if c in cnt:
+                cnt[c] -= 1
+                if cnt[c] == 0:
+                    # cnt[c] == 0 代表一个新的字符被完全 cover
+                    uncover -= 1
+            while uncover <= 0:
+                if uncover == 0:
+                    res = min(res, s[l: r], key=len) if res != '' else s[l: r]
+                d = s[l]
                 l += 1
+                if d in cnt:
+                    cnt[d] += 1
+                    if cnt[d] == 1:
+                        # cnt[d] == 1 代表一个新字符被 uncover 了
+                        uncover += 1
         return res
