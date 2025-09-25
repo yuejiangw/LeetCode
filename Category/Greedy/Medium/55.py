@@ -2,6 +2,14 @@ from typing import List
 
 class Solution:
     def canJump(self, nums: List[int]) -> bool:
+        maxCover = 0 
+        for i, num in enumerate(nums):
+            if maxCover >= i and i + num > maxCover:
+                maxCover = i + num
+        return maxCover >= len(nums) - 1
+
+class Solution:
+    def canJump(self, nums: List[int]) -> bool:
         # Greedy，假设我们在位置 i 起跳，可以选择的步长是 nums[i]
         # 跳跃的终点要选择 nums[i + 1: i + nums[i] + 1] 中最大的那个数
         # 本质上是判断跳跃覆盖范围是否可以到终点
