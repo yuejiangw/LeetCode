@@ -1,4 +1,35 @@
 class Solution:
+    def calculate(self, s: str) -> int:
+        # 模拟栈顶元素
+        last = 0    # 上一个数字
+        sign = '+'  # 上一个操作符
+        # 当前数字
+        num = 0
+        # 结果
+        res = 0
+        for ch in (s + '+'):
+            if ch == ' ':
+                continue
+            elif ch.isdigit():
+                num = num * 10 + int(ch)
+            else:
+                # 根据 sign 来将 last 并入 res
+                if sign == '+':
+                    res += last
+                    last = num
+                elif sign == '-':
+                    res += last
+                    last = -num
+                elif sign == '*':
+                    last = last * num
+                elif sign == '/':
+                    last = int(last / num)
+                num = 0
+                sign = ch
+
+        return res + last
+
+class Solution:
     op_priority = {'+': 0, '-': 0, '*': 1, '/': 1, '%': 1, '^': 2}
 
     def calc(self, num_stack: list, op_stack: list) -> None:
