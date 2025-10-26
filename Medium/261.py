@@ -20,12 +20,10 @@ class Solution:
     def validTree(self, n: int, edges: List[List[int]]) -> bool:
         # 连通图 + 无环
         # 并查集判断：在无向图里，如果一条边的两个端点已经属于同一个连通分量，则一定有环
-        if len(edges) != n - 1:
-            return False
         uf = UnionFind(n)
         for a, b in edges:
             r1, r2 = uf.find(a), uf.find(b)
             if r1 == r2:
                 return False
             uf.union(a, b)
-        return True
+        return uf.count == 1

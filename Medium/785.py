@@ -46,7 +46,7 @@ class Solution:
         def bfs(s):
             queue = deque([s]) # 用 True 和 False 代表两个 group
             while queue:
-                node= queue.popleft()
+                node = queue.popleft()
                 visited[node] = True
                 for adj in graph[node]:
                     if visited[adj]:

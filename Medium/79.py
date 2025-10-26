@@ -3,6 +3,32 @@ from typing import List
 
 class Solution:
     def exist(self, board: List[List[str]], word: str) -> bool:
+        # 不用全局变量的做法
+        m, n = len(board), len(board[0])
+        path = []
+        visited = [[False] * n for _ in range(m)]
+
+        def backtracking(i, j, start):
+            if start == len(word):
+                return True
+            if i < 0 or j < 0 or i >= m or j >= n or word[start] != board[i][j] or visited[i][j]:
+                return False
+            visited[i][j] = True
+            for x, y in [(i-1, j), (i+1, j), (i, j-1), (i, j+1)]:
+                if backtracking(x, y, start + 1):
+                    return True
+            visited[i][j] = False
+            return False
+        
+        for i in range(m):
+            for j in range(n):
+                if board[i][j] == word[0]:
+                    if backtracking(i, j, 0):
+                        return True
+        return False
+
+class Solution:
+    def exist(self, board: List[List[str]], word: str) -> bool:
         m, n = len(board), len(board[0])
         length = len(word)
         is_find = False
